@@ -56,15 +56,15 @@ void make_partition(int N, int M, int L, int* sources, int* targets, int* labels
         split_p<<<blocks_N, threads_N>>>(N, marks, blocks, next_numbers);
 
 #ifdef DEBUG2
-        int blocks_h[N];
-        bool marks_h[N];
-        int next_h[N];
+        std::vector<int> blocks_h(N);
+        std::vector<bool> marks_h(N);
+        std::vector<int> next_h(N);
 
-        gpuErrchk(cudaMemcpy(blocks_h, blocks, sizeof(int) * N,
+        gpuErrchk(cudaMemcpy(blocks_h.data(), blocks, sizeof(int) * N,
             cudaMemcpyDeviceToHost));
-        gpuErrchk(cudaMemcpy(marks_h, marks, sizeof(bool) * N,
+        gpuErrchk(cudaMemcpy(marks_h.data(), marks, sizeof(bool) * N,
             cudaMemcpyDeviceToHost));
-        gpuErrchk(cudaMemcpy(next_h, next_numbers, sizeof(int) * N,
+        gpuErrchk(cudaMemcpy(next_h.data(), next_numbers, sizeof(int) * N,
             cudaMemcpyDeviceToHost));
 
         std::cout << "State Partition after action " << a << std::endl;

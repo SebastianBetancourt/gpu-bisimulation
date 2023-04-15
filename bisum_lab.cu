@@ -208,7 +208,7 @@ int main(int argc, char *argv[]){
                 if(i < argc)
                     out_fn = argv[i];
                 else{
-                    printf("Need input file\n");
+                    printf("Need output file\n");
                     exit(1);
                 }
             }
@@ -272,14 +272,14 @@ int main(int argc, char *argv[]){
     }
 
     if(check || out){
-        int block[data.N];
+        vector<int> block(data.N);
 
-        gpuErrchk( cudaMemcpy(block, data.block_d, sizeof(int) * data.N, cudaMemcpyDeviceToHost) );
+        gpuErrchk( cudaMemcpy(block.data(), data.block_d, sizeof(int) * data.N, cudaMemcpyDeviceToHost) );
 
-        sort(block, block +data.N);
+        sort(block.begin(), block.end());
         vector<int> unique_count;
         unique_count.clear();
-        unique_copy(block, block + data.N, back_inserter(unique_count));
+        unique_copy(block.begin(), block.end(), back_inserter(unique_count));
         blocks_remaining = unique_count.size();
 
         printf("Remaing blocks: %d\n", blocks_remaining);

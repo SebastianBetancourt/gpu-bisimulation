@@ -9,7 +9,7 @@ to compile it.
 
 The program can be used like
 ```
-./bisum_lab data/cwi_1_2.aut --out
+./bisum_lab data/cwi_1_2.aut --out results.txt
 ```
 Then the timings will be stored in `results.txt`.
 

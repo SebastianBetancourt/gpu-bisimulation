@@ -253,18 +253,18 @@ void LTS::print_transitions(int max){
         max = M;
 
     to_host();
-    int order[M];
+    vector<int> order(M);
 
-    gpuErrchk(cudaMemcpy(order, order_d, sizeof(int) * M,
+    gpuErrchk(cudaMemcpy(order.data(), order_d, sizeof(int) * M,
         cudaMemcpyDeviceToHost));
 
     cout << "Transitions" << endl;
     cout << "Source | Label | Target | Order" << endl;
     for(int i=0; i<M && i<max; i++){
         string l = reverse_label_map[label[i]];
-        char ls[l.length()];
-        strcpy(ls, l.c_str());
-        printf("%6d | %5s | %6d | %5d\n", source[i], ls,
+        //char ls[l.length()];
+        //strcpy(ls, l.c_str());
+        printf("%6d | %5s | %6d | %5d\n", source[i], l.c_str(),
          target[i], order[i]);
     }
 
@@ -277,15 +277,15 @@ void LTS::print_states(int max){
     if(max == -1)
         max = N;
 
-    int blocks[N];
-    int nr_mark[N];
-    int marks_offset[N];
+    vector<int> blocks(N);
+    vector<int> nr_mark(N);
+    vector<int> marks_offset(N);
 
-    gpuErrchk(cudaMemcpy(blocks, block_d, sizeof(int) * N,
+    gpuErrchk(cudaMemcpy(blocks.data(), block_d, sizeof(int) * N,
         cudaMemcpyDeviceToHost));
-    gpuErrchk(cudaMemcpy(nr_mark, nr_mark_d, sizeof(int) * N,
+    gpuErrchk(cudaMemcpy(nr_mark.data(), nr_mark_d, sizeof(int) * N,
         cudaMemcpyDeviceToHost));
-    gpuErrchk(cudaMemcpy(marks_offset, marks_offset_d, sizeof(int) * N,
+    gpuErrchk(cudaMemcpy(marks_offset.data(), marks_offset_d, sizeof(int) * N,
         cudaMemcpyDeviceToHost));
 
     cout << "State Partition" << endl;

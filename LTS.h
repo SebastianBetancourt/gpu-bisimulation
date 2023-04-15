@@ -1,9 +1,9 @@
 #ifndef LTS_H
 #define LTS_H
 
-#include <bits/stdc++.h>
 #include <unordered_map>
 #include <fstream>
+#include <algorithm>
 
 #include "utility.h"
 #include "preprocess_partition.h"

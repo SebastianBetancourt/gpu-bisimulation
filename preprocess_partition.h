@@ -2,6 +2,7 @@
 #define PREPROCESS_PARTITION_H
 #include "utility.h"
 #include <stdio.h>
+#include <vector>
 
 __global__ void mark_p(int M, int* sources,
             int* labels, bool* marks, int current_action, int* blocks);

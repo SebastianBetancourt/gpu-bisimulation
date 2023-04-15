@@ -93,9 +93,9 @@ int make_marks_offset(int N, int M, int* sources, int* labels, int* order,
 }
 
 void test(){
-     int N = 4;
-     int M = 8;
-     int a = 0; int b = 1; int c =2;
+     const int N = 4;
+     const int M = 8;
+     const int a = 0; int b = 1; int c =2;
      int sources[M] = {0, 1, 3, 0, 1, 3, 0, 1};
      int labels[M]  = {a, a, c, a, b, c, c, c};
      int targets[M] = {3, 0, 0, 1, 3, 3, 3, 1};
